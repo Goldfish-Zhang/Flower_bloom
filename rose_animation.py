@@ -2,6 +2,7 @@ import pygame
 import math
 import random
 from typing import List, Tuple
+from real_data_config import REAL_ROSE_DATA, ANIMATION_TIME_MAPPING, DATA_SOURCES, SHOW_REAL_DATA, DATA_DISPLAY_POSITION, DATA_FONT_SIZE
 
 # 初始化Pygame
 pygame.init()
@@ -787,15 +788,15 @@ class SeasonalRose:
     
     def update_season_cycle(self):
         """更新季节循环（直接从春季盛开开始）"""
-        # 根据生命周期阶段决定季节
+        # 根据生命周期阶段决定季节，并对应真实数据
         if self.life_stage == "bloom":
-            self.current_season = "spring"
+            self.current_season = "spring"  # 对应春季25天开花期
         elif self.life_stage == "maintain":
-            self.current_season = "summer"
+            self.current_season = "summer"  # 对应夏季40天盛花期
         elif self.life_stage == "wither":
-            self.current_season = "autumn"
+            self.current_season = "autumn"  # 对应秋季30天二次开花期
         else:  # dead, reset
-            self.current_season = "winter"
+            self.current_season = "winter"  # 对应冬季休眠期
     
     def update(self):
         """更新动画状态"""
@@ -1365,6 +1366,66 @@ class EnhancedRoseAnimation:
         control_text = "空格键: 加速 | ESC: 退出"
         control_surface = self.font.render(control_text, True, (120, 120, 120))
         self.screen.blit(control_surface, (25, SCREEN_HEIGHT - 25))
+        
+        # 显示真实数据
+        if SHOW_REAL_DATA:
+            self.draw_real_data_panel()
+    
+    def draw_real_data_panel(self):
+        """显示真实月季花数据"""
+        # 获取当前季节的真实数据
+        current_season_data = REAL_ROSE_DATA.get(self.rose.current_season, {})
+        
+        # 数据面板位置和大小
+        panel_x = SCREEN_WIDTH - 420
+        panel_y = 120
+        panel_width = 400
+        panel_height = 300
+        
+        # 绘制数据面板背景
+        panel_bg = pygame.Rect(panel_x, panel_y, panel_width, panel_height)
+        temp_panel = pygame.Surface((panel_width, panel_height), pygame.SRCALPHA)
+        pygame.draw.rect(temp_panel, (20, 50, 80, 200), temp_panel.get_rect())
+        pygame.draw.rect(temp_panel, (100, 150, 255), temp_panel.get_rect(), 3)
+        self.screen.blit(temp_panel, panel_bg.topleft)
+        
+        # 面板标题
+        try:
+            data_font = pygame.font.Font(None, 24)
+            title_font = pygame.font.Font(None, 28)
+        except:
+            data_font = pygame.font.SysFont('arial', 18)
+            title_font = pygame.font.SysFont('arial', 22)
+        
+        title_text = "真实月季花生长数据"
+        title_surface = title_font.render(title_text, True, (255, 255, 255))
+        self.screen.blit(title_surface, (panel_x + 15, panel_y + 15))
+        
+        # 显示当前季节数据
+        if current_season_data:
+            data_texts = [
+                f"季节: {current_season_data.get('season_name', 'N/A')}",
+                f"月份: {current_season_data.get('months', 'N/A')}",
+                f"温度范围: {current_season_data.get('temperature_range', 'N/A')}",
+                f"开花期: {current_season_data.get('bloom_period_days', 0)}天",
+                f"生长阶段: {current_season_data.get('growth_phase', 'N/A')}",
+                f"湿度: {current_season_data.get('humidity', 'N/A')}",
+                f"日照: {current_season_data.get('sunlight_hours', 'N/A')}",
+                f"土温: {current_season_data.get('soil_temperature', 'N/A')}",
+                "",
+                f"描述: {current_season_data.get('description', 'N/A')}"
+            ]
+            
+            for i, text in enumerate(data_texts):
+                if text:  # 跳过空行
+                    text_surface = data_font.render(text, True, (255, 255, 255))
+                    self.screen.blit(text_surface, (panel_x + 15, panel_y + 50 + i * 22))
+        
+        # 显示数据来源
+        source_y = panel_y + panel_height - 40
+        source_text = "数据来源: 中国气象局 + 中科院植物所"
+        source_surface = data_font.render(source_text, True, (180, 180, 180))
+        self.screen.blit(source_surface, (panel_x + 15, source_y))
     
     def draw_cycle_progress(self):
         """绘制循环进度条"""
