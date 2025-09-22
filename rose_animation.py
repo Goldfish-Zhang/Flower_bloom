@@ -1371,6 +1371,28 @@ class EnhancedRoseAnimation:
         if SHOW_REAL_DATA:
             self.draw_real_data_panel()
     
+    def calculate_current_day(self):
+        """计算当前对应的真实天数"""
+        from real_data_config import ANIMATION_TIME_MAPPING
+        
+        # 获取当前季节和进度
+        current_season = self.rose.current_season
+        stage_progress = self.rose.stage_progress
+        
+        # 根据季节和阶段计算天数
+        if current_season == "spring":
+            # 春季 (25天)
+            return int(stage_progress * 25) + 1
+        elif current_season == "summer":
+            # 夏季 (40天)，从第26天开始
+            return int(stage_progress * 40) + 26
+        elif current_season == "autumn":
+            # 秋季 (30天)，从第66天开始
+            return int(stage_progress * 30) + 66
+        else:  # winter
+            # 冬季休眠期，显示为第95天（年度结束）
+            return 95
+    
     def draw_real_data_panel(self):
         """显示真实月季花数据"""
         # 获取当前季节的真实数据
@@ -1449,8 +1471,35 @@ class EnhancedRoseAnimation:
             pygame.draw.rect(self.screen, progress_color,
                            (bar_x, bar_y, progress_width, bar_height))
         
-        # 阶段分割（移除花苞期）
-        stages = ["盛开", "维持", "凋零", "完全凋零", "重置"]
+        # 计算当前天数（基于真实数据映射）
+        current_day = self.calculate_current_day()
+        
+        # 天数显示位置（跟随进度条）
+        day_x = bar_x + progress_width - 15  # 稍微向左偏移避免超出边界
+        if day_x < bar_x + 30:  # 确保不会超出进度条左边界
+            day_x = bar_x + 30
+        day_y = bar_y - 35
+        
+        # 绘制天数背景圆圈
+        pygame.draw.circle(self.screen, (50, 50, 50), (day_x, day_y), 18)
+        pygame.draw.circle(self.screen, (255, 255, 255), (day_x, day_y), 18, 2)
+        
+        # 绘制天数文字
+        day_font = pygame.font.Font(None, 24)
+        day_text = f"{current_day}"
+        day_surface = day_font.render(day_text, True, (255, 255, 255))
+        day_rect = day_surface.get_rect(center=(day_x, day_y))
+        self.screen.blit(day_surface, day_rect)
+        
+        # 绘制"Day"标签
+        label_font = pygame.font.Font(None, 18)
+        label_text = "Day"
+        label_surface = label_font.render(label_text, True, (180, 180, 180))
+        label_rect = label_surface.get_rect(center=(day_x, day_y + 25))
+        self.screen.blit(label_surface, label_rect)
+        
+        # 阶段分割（移除花苞期）- 使用更短的标签避免重叠
+        stages = ["Bloom", "Peak", "Wither", "Sleep", "Reset"]
         durations = [
             self.rose.bloom_duration, 
             self.rose.maintain_duration,
@@ -1461,17 +1510,32 @@ class EnhancedRoseAnimation:
         
         current_pos = 0
         for i, (stage, duration) in enumerate(zip(stages, durations)):
+            # 计算当前阶段的起始位置
+            stage_start = current_pos
             current_pos += duration
+            stage_end = current_pos
+            
             x_pos = bar_x + int(bar_width * current_pos / self.rose.total_cycle_duration)
             
             # 分割线
             pygame.draw.line(self.screen, (255, 255, 255),
                            (x_pos, bar_y), (x_pos, bar_y + bar_height), 2)
             
-            # 标签
-            if i < len(stages) - 1:
-                label_surface = pygame.font.Font(None, 22).render(stage, True, (180, 180, 180))
-                self.screen.blit(label_surface, (x_pos - 20, bar_y - 30))
+            # 标签（在每个阶段的中心位置显示）
+            if i < len(stages) - 1:  # 不显示最后一个阶段的标签（Reset阶段很短）
+                label_font = pygame.font.Font(None, 20)
+                label_surface = label_font.render(stage, True, (180, 180, 180))
+                
+                # 计算阶段的中心位置
+                stage_center = (stage_start + stage_end) / 2
+                center_x = bar_x + int(bar_width * stage_center / self.rose.total_cycle_duration)
+                
+                # 使标签居中
+                label_rect = label_surface.get_rect()
+                label_x = center_x - label_rect.width // 2
+                label_y = bar_y + bar_height + 8
+                
+                self.screen.blit(label_surface, (label_x, label_y))
     
     def handle_events(self):
         """处理事件"""
