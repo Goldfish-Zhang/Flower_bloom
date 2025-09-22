@@ -1,85 +1,107 @@
-# 🌹 月季花盛开动画 - 增强版本 (含真实数据)
+# 🌹 Enhanced Rose Bloom Animation with Real Scientific Data
 
-一个基于Pygame的精美月季花盛开动画，展现从春季萌芽到冬季休眠的完整生命周期，包含真实的植物学数据和科学观测。
+An elegant rose blooming animation built with Pygame, showcasing the complete lifecycle from spring budding to winter dormancy, featuring real botanical data and scientific observations.
 
-## ✨ 特色功能
+## ✨ Key Features
 
-### 🎨 视觉效果
-- **120个智能粒子系统** - 三层渲染优化
-- **10种季节粒子效果** - 春季花瓣、夏季萤火虫、秋季落叶、冬季雪花等
-- **动态季节背景** - 四季渐变色彩和环境光照
-- **多层花瓣渲染** - 6层花瓣，每层14个，共84个花瓣
-- **实时光影效果** - 动态光照和辉光渲染
+### 🎨 Visual Effects
+- **120 Intelligent Particle System** - Three-layer rendering optimization
+- **10 Seasonal Particle Effects** - Spring petals, summer fireflies, autumn leaves, winter snowflakes
+- **Dynamic Seasonal Backgrounds** - Four-season gradient colors with ambient lighting
+- **Multi-layer Petal Rendering** - 6 layers with 14 petals each, totaling 84 petals
+- **Real-time Lighting Effects** - Dynamic lighting and glow rendering
 
-### 📊 科学数据展示
-- **真实月季生长周期** - 基于中国气象局和中科院植物所数据
-- **季节温度范围** - 每季节的适宜温度区间
-- **开花期天数** - 春季25天、夏季40天、秋季30天
-- **土壤和环境参数** - 湿度、日照时长、土壤温度
-- **植物生长阶段** - 萌芽期、盛花期、二次开花期、休眠期
+### 📊 Scientific Data Display
+- **Real Rose Growth Cycles** - Based on China Meteorological Bureau and CAS Institute of Botany data
+- **Seasonal Temperature Ranges** - Optimal temperature zones for each season
+- **Flowering Period Days** - Spring 25 days, Summer 40 days, Autumn 30 days
+- **Soil & Environmental Parameters** - Humidity, sunlight hours, soil temperature
+- **Plant Growth Phases** - Budding, Peak blooming, Second blooming, Dormancy
 
-### 🌱 真实数据特性
-- **春季数据**: 15-25°C, 25天开花期, 萌芽至初花期
-- **夏季数据**: 25-35°C, 40天盛花期, 最繁茂阶段
-- **秋季数据**: 10-20°C, 30天二次开花期, 花色更浓艳
-- **冬季数据**: -5-10°C, 休眠期, 准备来年萌发
-- **时间映射**: 真实95天生长期映射为8秒动画
+### ⏰ Real-time Day Counter
+- **Moving Day Indicator** - Follows progress bar showing current day (1-95)
+- **Scientific Time Mapping** - Real 95-day growth cycle mapped to 15-second animation
+- **Phase Tracking** - Clear visualization of current growth stage
 
-## 🚀 快速开始
+### 🌱 Authentic Scientific Data
+- **Spring Data**: 15-25°C, 25-day flowering period, budding to early bloom phase
+- **Summer Data**: 25-35°C, 40-day peak blooming period, most abundant stage
+- **Autumn Data**: 10-20°C, 30-day second blooming period, more vivid colors
+- **Winter Data**: -5-10°C, dormancy period, preparing for next year's growth
+- **Time Mapping**: Real 95-day active period mapped to 15-second animation cycle
 
-### 安装依赖
+## 🚀 Quick Start
+
+### Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 运行动画
+### Run Animation
 ```bash
 python launcher.py
 ```
 
-## 📋 系统要求
+## 📋 System Requirements
 - Python 3.7+
 - Pygame 2.0+
 - Windows/macOS/Linux
 
-## 🎮 控制说明
-- **空格键**: 加速动画
-- **ESC键**: 退出程序
+## 🎮 Controls
+- **SPACE**: Speed up animation
+- **ESC**: Exit program
 
-## 📁 项目结构
+## 📁 Project Structure
 ```
 flower_bloom/
-├── launcher.py              # 启动器
-├── rose_animation.py        # 主动画文件
-├── config.py               # 动画配置
-├── real_data_config.py     # 真实数据配置
-├── requirements.txt        # 依赖包
-├── README.md              # 中文说明
-├── README_EN.md           # 英文说明
-└── ENHANCEMENT_SUMMARY.md # 技术增强总结
+├── launcher.py              # Application launcher
+├── rose_animation.py        # Main animation file
+├── config.py               # Animation configuration
+├── real_data_config.py     # Real scientific data configuration
+├── data_validator.py       # Data validation script
+├── requirements.txt        # Dependencies
+├── README.md              # Documentation
+├── README_EN.md           # English documentation
+└── ENHANCEMENT_SUMMARY.md # Technical enhancement summary
 ```
 
-## 🔬 数据来源
-- **温度数据**: 中国气象局月季适宜温度数据
-- **生长数据**: 《月季栽培学》- 中国农业出版社
-- **物候数据**: 植物物候学观测数据 - 中科院植物所
-- **园艺数据**: 国际月季协会生长周期研究报告
+## 🔬 Data Sources
+- **Temperature Data**: China Meteorological Bureau rose temperature data
+- **Growth Data**: "Rose Cultivation" - China Agricultural Press
+- **Phenology Data**: Plant phenology observation data - CAS Institute of Botany
+- **Horticultural Data**: International Rose Society growth cycle research reports
 
-## 🌟 技术亮点
-- **科学准确性**: 基于真实植物学观测数据
-- **视觉丰富度**: 120个智能粒子，10种季节效果
-- **性能优化**: 三层渲染，60FPS流畅运行
-- **数据展示**: 实时显示当前季节的科学数据
+## 🌟 Technical Highlights
+- **Scientific Accuracy**: Based on real botanical observation data
+- **Visual Richness**: 120 intelligent particles with 10 seasonal effects
+- **Performance Optimization**: Three-layer rendering, smooth 60FPS operation
+- **Data Visualization**: Real-time display of current season's scientific data
+- **Educational Value**: Combines beautiful visuals with scientific learning
 
-## 📸 动画展示
-动画包含四个主要阶段：
-1. **春季盛开** (2秒) - 对应真实25天开花期
-2. **夏季维持** (3秒) - 对应真实40天盛花期  
-3. **秋季凋零** (2秒) - 对应真实30天二次开花期
-4. **冬季重置** (1秒) - 对应真实休眠期
+## 📸 Animation Phases
+The animation includes four main phases:
+1. **Spring Blooming** (3.75s) - Corresponds to real 25-day flowering period
+2. **Summer Peak** (6.25s) - Corresponds to real 40-day peak blooming period  
+3. **Autumn Withering** (3.75s) - Corresponds to real 30-day second blooming period
+4. **Winter Reset** (1.25s) - Corresponds to real dormancy period
 
-## 🤝 贡献
-欢迎提交Issue和Pull Request来改进这个项目！
+## 🎯 Educational Features
+- **Real-time Day Counter**: Shows current day (1-95) following the progress bar
+- **Scientific Data Panel**: Displays temperature, humidity, sunlight hours, and growth phases
+- **Season Indicators**: Clear labels showing current growth stage
+- **Progress Visualization**: Color-coded progress bar with phase markers
 
-## 📜 许可证
-本项目采用MIT许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
+## 🌍 International Accessibility
+- **English Interface**: Full English UI for global accessibility
+- **Universal Compatibility**: Optimized font rendering for all systems
+- **Cross-platform Support**: Works on Windows, macOS, and Linux
+
+## 🤝 Contributing
+Welcome to submit Issues and Pull Requests to improve this project!
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+
+---
+
+**Created with ❤️ for educational and artistic purposes**
