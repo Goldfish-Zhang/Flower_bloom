@@ -733,13 +733,13 @@ class SeasonalRose:
         self.stage_progress = 0.0
         self.total_progress = 0.0  # 整个循环进度 (0-1)
         
-        # 时间控制（进一步加快循环）
+        # 时间控制（延长到15秒循环）
         self.bud_duration = 0        # 跳过花苞期
-        self.bloom_duration = 120    # 2秒
-        self.maintain_duration = 180 # 3秒
-        self.wither_duration = 120   # 2秒
+        self.bloom_duration = 225    # 3.75秒 (25天 → 225帧)
+        self.maintain_duration = 375 # 6.25秒 (40天 → 375帧)  
+        self.wither_duration = 225   # 3.75秒 (30天 → 225帧)
         self.dead_duration = 60      # 1秒
-        self.reset_duration = 20     # 0.33秒
+        self.reset_duration = 15     # 0.25秒
         
         self.total_cycle_duration = (self.bud_duration + self.bloom_duration + 
                                    self.maintain_duration + self.wither_duration + 
@@ -1308,7 +1308,7 @@ class EnhancedRoseAnimation:
     def draw_ui(self):
         """绘制用户界面"""
         # 标题
-        title_text = "增强季节循环月季花动画"
+        title_text = "Enhanced Seasonal Rose Bloom Animation"
         title_surface = self.title_font.render(title_text, True, (80, 80, 80))
         title_rect = title_surface.get_rect(center=(SCREEN_WIDTH // 2, 50))
         
@@ -1324,27 +1324,27 @@ class EnhancedRoseAnimation:
         
         # 状态信息
         stage_names = {
-            "bud": "花苞期",
-            "bloom": "盛开期", 
-            "maintain": "维持期",
-            "wither": "凋零期",
-            "dead": "完全凋零",
-            "reset": "重置期"
+            "bud": "Budding",
+            "bloom": "Blooming", 
+            "maintain": "Peak Bloom",
+            "wither": "Withering",
+            "dead": "Dormant",
+            "reset": "Resetting"
         }
         
         season_names = {
-            "spring": "春季",
-            "summer": "夏季",
-            "autumn": "秋季", 
-            "winter": "冬季"
+            "spring": "Spring",
+            "summer": "Summer",
+            "autumn": "Autumn", 
+            "winter": "Winter"
         }
         
-        stage_text = f"阶段: {stage_names.get(self.rose.life_stage, self.rose.life_stage)}"
-        season_text = f"季节: {season_names.get(self.rose.current_season, self.rose.current_season)}"
-        progress_text = f"阶段进度: {int(self.rose.stage_progress * 100)}%"
-        cycle_text = f"循环进度: {int(self.rose.total_progress * 100)}%"
-        petal_text = f"花瓣数量: {len(self.rose.petals)}"
-        particle_text = f"粒子数量: {len(self.rose.particles)}"
+        stage_text = f"Stage: {stage_names.get(self.rose.life_stage, self.rose.life_stage)}"
+        season_text = f"Season: {season_names.get(self.rose.current_season, self.rose.current_season)}"
+        progress_text = f"Stage Progress: {int(self.rose.stage_progress * 100)}%"
+        cycle_text = f"Cycle Progress: {int(self.rose.total_progress * 100)}%"
+        petal_text = f"Petals: {len(self.rose.petals)}"
+        particle_text = f"Particles: {len(self.rose.particles)}"
         
         # 信息面板
         info_y = SCREEN_HEIGHT - 200
@@ -1363,7 +1363,7 @@ class EnhancedRoseAnimation:
         self.draw_cycle_progress()
         
         # 控制说明
-        control_text = "空格键: 加速 | ESC: 退出"
+        control_text = "SPACE: Speed up | ESC: Exit"
         control_surface = self.font.render(control_text, True, (120, 120, 120))
         self.screen.blit(control_surface, (25, SCREEN_HEIGHT - 25))
         
@@ -1397,23 +1397,23 @@ class EnhancedRoseAnimation:
             data_font = pygame.font.SysFont('arial', 18)
             title_font = pygame.font.SysFont('arial', 22)
         
-        title_text = "真实月季花生长数据"
+        title_text = "Real Rose Growth Data"
         title_surface = title_font.render(title_text, True, (255, 255, 255))
         self.screen.blit(title_surface, (panel_x + 15, panel_y + 15))
         
-        # 显示当前季节数据
+        # 显示当前季节数据（英文版本）
         if current_season_data:
             data_texts = [
-                f"季节: {current_season_data.get('season_name', 'N/A')}",
-                f"月份: {current_season_data.get('months', 'N/A')}",
-                f"温度范围: {current_season_data.get('temperature_range', 'N/A')}",
-                f"开花期: {current_season_data.get('bloom_period_days', 0)}天",
-                f"生长阶段: {current_season_data.get('growth_phase', 'N/A')}",
-                f"湿度: {current_season_data.get('humidity', 'N/A')}",
-                f"日照: {current_season_data.get('sunlight_hours', 'N/A')}",
-                f"土温: {current_season_data.get('soil_temperature', 'N/A')}",
+                f"Season: {current_season_data.get('season_name', 'N/A')}",
+                f"Months: {current_season_data.get('months', 'N/A')}",
+                f"Temperature: {current_season_data.get('temperature_range', 'N/A')}",
+                f"Flowering period: {current_season_data.get('bloom_period_days', 0)} days",
+                f"Growth phase: {current_season_data.get('growth_phase', 'N/A')}",
+                f"Humidity: {current_season_data.get('humidity', 'N/A')}",
+                f"Sunlight: {current_season_data.get('sunlight_hours', 'N/A')}",
+                f"Soil temp: {current_season_data.get('soil_temperature', 'N/A')}",
                 "",
-                f"描述: {current_season_data.get('description', 'N/A')}"
+                f"Description: {current_season_data.get('description', 'N/A')}"
             ]
             
             for i, text in enumerate(data_texts):
@@ -1423,7 +1423,7 @@ class EnhancedRoseAnimation:
         
         # 显示数据来源
         source_y = panel_y + panel_height - 40
-        source_text = "数据来源: 中国气象局 + 中科院植物所"
+        source_text = "Data Source: China Meteorological Bureau + CAS"
         source_surface = data_font.render(source_text, True, (180, 180, 180))
         self.screen.blit(source_surface, (panel_x + 15, source_y))
     

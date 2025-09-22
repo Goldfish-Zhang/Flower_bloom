@@ -4,56 +4,76 @@
 # === 真实月季花生长科学数据 ===
 REAL_ROSE_DATA = {
     "spring": {
-        "season_name": "春季 (Spring)",
-        "months": "3-5月",
+        "season_name": "Spring",
+        "season_name_cn": "春季 (Spring)",
+        "months": "Mar-May",
+        "months_cn": "3-5月",
         "temperature_range": "15-25°C",
         "bloom_period_days": 25,  # 春季月季盛开期约25天
-        "growth_phase": "萌芽期至初花期",
+        "growth_phase": "Budding to Early Bloom",
+        "growth_phase_cn": "萌芽期至初花期",
         "humidity": "60-70%",
-        "sunlight_hours": "6-8小时/天",
+        "sunlight_hours": "6-8 hrs/day",
+        "sunlight_hours_cn": "6-8小时/天",
         "soil_temperature": "12-18°C",
-        "description": "月季萌芽展叶，花蕾形成，初次开花"
+        "description": "Rose budding, leaf development, bud formation, first blooming",
+        "description_cn": "月季萌芽展叶，花蕾形成，初次开花"
     },
     "summer": {
-        "season_name": "夏季 (Summer)", 
-        "months": "6-8月",
+        "season_name": "Summer", 
+        "season_name_cn": "夏季 (Summer)",
+        "months": "Jun-Aug",
+        "months_cn": "6-8月",
         "temperature_range": "25-35°C",
         "bloom_period_days": 40,  # 夏季月季盛花期约40天
-        "growth_phase": "盛花期",
+        "growth_phase": "Peak Blooming",
+        "growth_phase_cn": "盛花期",
         "humidity": "70-80%",
-        "sunlight_hours": "8-10小时/天",
+        "sunlight_hours": "8-10 hrs/day",
+        "sunlight_hours_cn": "8-10小时/天",
         "soil_temperature": "20-28°C",
-        "description": "月季进入盛花期，花朵最为繁茂"
+        "description": "Rose enters peak blooming period, most abundant flowering",
+        "description_cn": "月季进入盛花期，花朵最为繁茂"
     },
     "autumn": {
-        "season_name": "秋季 (Autumn)",
-        "months": "9-11月", 
+        "season_name": "Autumn",
+        "season_name_cn": "秋季 (Autumn)",
+        "months": "Sep-Nov",
+        "months_cn": "9-11月", 
         "temperature_range": "10-20°C",
         "bloom_period_days": 30,  # 秋季月季二次开花约30天
-        "growth_phase": "二次开花期",
+        "growth_phase": "Second Blooming",
+        "growth_phase_cn": "二次开花期",
         "humidity": "50-60%",
-        "sunlight_hours": "5-7小时/天",
+        "sunlight_hours": "5-7 hrs/day",
+        "sunlight_hours_cn": "5-7小时/天",
         "soil_temperature": "8-15°C",
-        "description": "月季秋季二次开花，花色更浓艳"
+        "description": "Rose second blooming period, more vivid flower colors",
+        "description_cn": "月季秋季二次开花，花色更浓艳"
     },
     "winter": {
-        "season_name": "冬季 (Winter)",
-        "months": "12-2月",
+        "season_name": "Winter",
+        "season_name_cn": "冬季 (Winter)",
+        "months": "Dec-Feb",
+        "months_cn": "12-2月",
         "temperature_range": "-5-10°C", 
         "bloom_period_days": 0,  # 冬季休眠期，无开花
-        "growth_phase": "休眠期",
+        "growth_phase": "Dormancy",
+        "growth_phase_cn": "休眠期",
         "humidity": "40-50%",
-        "sunlight_hours": "3-5小时/天",
+        "sunlight_hours": "3-5 hrs/day",
+        "sunlight_hours_cn": "3-5小时/天",
         "soil_temperature": "0-5°C",
-        "description": "月季进入休眠期，准备来年春季萌发"
+        "description": "Rose enters dormancy, preparing for next year's growth",
+        "description_cn": "月季进入休眠期，准备来年春季萌发"
     }
 }
 
 # === 动画时间映射 (将真实天数映射到动画秒数) ===
 ANIMATION_TIME_MAPPING = {
-    "real_day_to_animation_second": 0.084,  # 1天 ≈ 0.084秒动画时间
+    "real_day_to_animation_second": 0.158,  # 1天 ≈ 0.158秒动画时间 (15秒动画)
     "total_real_cycle_days": 95,  # 真实一年中月季活跃期约95天
-    "total_animation_cycle_seconds": 8,  # 动画一个循环8秒
+    "total_animation_cycle_seconds": 15,  # 动画一个循环15秒
     "spring_real_days": 25,  # 春季真实开花天数
     "summer_real_days": 40,  # 夏季真实开花天数  
     "autumn_real_days": 30,  # 秋季真实开花天数
