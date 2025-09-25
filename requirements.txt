@@ -1,1 +1,2 @@
-pygame>=2.0.0
+pygame>=2.0.0,<3.0.0
+# Recommended: pygame==2.6.1 for best compatibility

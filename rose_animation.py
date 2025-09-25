@@ -4,8 +4,15 @@ import random
 from typing import List, Tuple
 from real_data_config import REAL_ROSE_DATA, ANIMATION_TIME_MAPPING, DATA_SOURCES, SHOW_REAL_DATA, DATA_DISPLAY_POSITION, DATA_FONT_SIZE
 
+# 设置随机种子确保花瓣形状一致性
+random.seed(42)  # 固定种子，确保所有用户看到相同的花瓣排列
+
 # 初始化Pygame
 pygame.init()
+
+# 确保字体系统正确初始化（跨平台兼容性）
+if not pygame.font.get_init():
+    pygame.font.init()
 
 # 常量
 SCREEN_WIDTH = 1200
@@ -762,6 +769,9 @@ class SeasonalRose:
         
     def create_abundant_petals(self):
         """创建适量花瓣（优化性能）"""
+        # 重新设置随机种子确保一致的花瓣生成
+        random.seed(42)
+        
         # 减少花瓣层数和密度
         layer_configs = [
             {"layer": 0, "count": 8},   # 内层 - 8片
