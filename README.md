@@ -2,6 +2,12 @@
 
 An elegant rose blooming animation built with Pygame, showcasing the complete lifecycle from spring budding to winter dormancy, featuring real botanical data and scientific observations.
 
+## 🎥 Demo Video
+
+Watch the complete animation in action: **[20250925_flower_bloom.mp4](./20250925_flower_bloom.mp4)**
+
+*The video demonstrates the full 15-second cycle with real-time day counter, scientific data display, and all seasonal particle effects.*
+
 ## ✨ Key Features
 
 ### 🎨 Visual Effects
